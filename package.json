@@ -18,6 +18,9 @@
     "url": "https://github.com/Kyntaz/passione-js/issues"
   },
   "homepage": "https://github.com/Kyntaz/passione-js#readme",
+  "bin": {
+    "passione": "./build/main.js"
+  },
   "devDependencies": {
     "@tsconfig/node16": "1.0.2",
     "@types/html-minifier": "^4.0.2",

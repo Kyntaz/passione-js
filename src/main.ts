@@ -1,3 +1,5 @@
+#! /usr/bin/env node
+
 import { compile } from "./Passione.js";
 import minimist from "minimist";
 
