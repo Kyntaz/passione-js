@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "example": "node ./build/main -i example example_output"
+    "example": "node ./build/main -i example example_output",
+    "install:passione": "npm run build && npm i -g"
   },
   "repository": {
     "type": "git",
