@@ -3,18 +3,50 @@ import { globby as glob } from "globby";
 import fs from "fs";
 import path from "path";
 
-export async function compile(inputPath: string, outputPath: string) {
-    const normalizedInputPath = inputPath
-        .replaceAll("\\", "/")
-        .replace(/\/$/, "");
-
+function setupOutputPath(inputPath: string, outputPath: string) {
     try {
-        fs.mkdirSync(outputPath, {
+        fs.rmSync(outputPath, {
             recursive: true,
         });
     } catch {
         // Ignore the exception...
     }
+
+    fs.cpSync(inputPath, outputPath, {
+        recursive: true,
+    });
+
+    try {
+        fs.rmSync(path.join(outputPath, "pages"), {
+            recursive: true,
+        });
+    } catch {
+        // Ignore the exception...
+    }
+
+    try {
+        fs.rmSync(path.join(outputPath, "pages"), {
+            recursive: true,
+        });
+    } catch {
+        // Ignore the exception...
+    }
+
+    try {
+        fs.rmSync(path.join(outputPath, "blocks"), {
+            recursive: true,
+        });
+    } catch {
+        // Ignore the exception...
+    }
+}
+
+export async function compile(inputPath: string, outputPath: string) {
+    setupOutputPath(inputPath, outputPath);
+
+    const normalizedInputPath = inputPath
+        .replaceAll("\\", "/")
+        .replace(/\/$/, "");
     
     const pages = await glob(`${normalizedInputPath}/pages/*/**`, {
         absolute: true,

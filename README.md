@@ -36,6 +36,7 @@ Check `./example` for an example of how to structure the HTML files for Passione
 npm run build # Builds the project
 npm run install:passione # Installs Passione globally
 npm run example # Runs the build version of Passione over the example folder
+npm run build:pack # Build and pack Passione
 ```
 
 ## ℹ️ License

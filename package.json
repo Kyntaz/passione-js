@@ -1,13 +1,14 @@
 {
   "name": "passione",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A simple HTML preprocessor for simple websites.",
   "main": "main.js",
   "type": "module",
   "scripts": {
     "build": "tsc",
     "example": "node ./build/main -i example example_output",
-    "install:passione": "npm run build && npm i -g"
+    "install:passione": "npm run build && npm i -g",
+    "build:pack": "npm run build && npm pack"
   },
   "repository": {
     "type": "git",
