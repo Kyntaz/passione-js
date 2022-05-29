@@ -25,14 +25,6 @@ function setupOutputPath(inputPath: string, outputPath: string) {
     }
 
     try {
-        fs.rmSync(path.join(outputPath, "pages"), {
-            recursive: true,
-        });
-    } catch {
-        // Ignore the exception...
-    }
-
-    try {
         fs.rmSync(path.join(outputPath, "blocks"), {
             recursive: true,
         });
