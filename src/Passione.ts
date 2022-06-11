@@ -1,35 +1,39 @@
 import { generatePage } from "./GeneratePage.js";
 import { globby as glob } from "globby";
-import fs from "fs";
+import { ConfigurationManager } from "./ConfigurationManager.js";
+import fs from "fs-extra";
 import path from "path";
 
-function setupOutputPath(inputPath: string, outputPath: string) {
+function tryRm(rmPath: string) {
     try {
-        fs.rmSync(outputPath, {
+        fs.rmSync(rmPath, {
             recursive: true,
         });
     } catch {
         // Ignore the exception...
     }
+}
+
+function tryClearDir(clearPath: string) {
+    try {
+        fs.emptyDirSync(clearPath);
+    } catch {
+        // Ignore the exception...
+    }
+}
+
+function setupOutputPath(inputPath: string, outputPath: string) {
+    tryClearDir(outputPath);
 
     fs.cpSync(inputPath, outputPath, {
         recursive: true,
     });
 
-    try {
-        fs.rmSync(path.join(outputPath, "pages"), {
-            recursive: true,
-        });
-    } catch {
-        // Ignore the exception...
-    }
+    tryRm(path.join(outputPath, "pages"));
+    tryRm(path.join(outputPath, "blocks"));
 
-    try {
-        fs.rmSync(path.join(outputPath, "blocks"), {
-            recursive: true,
-        });
-    } catch {
-        // Ignore the exception...
+    for (const excludePath of ConfigurationManager.exclude) {
+        tryRm(path.join(outputPath, excludePath));
     }
 }
 
